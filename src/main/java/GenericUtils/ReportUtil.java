@@ -9,7 +9,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 public class ReportUtil {
 	
 	private ExtentReports report;
-	public ReportUtil(String p,String dt,String rn) {
+	public ReportUtil(String p,String dt,String rn,String pn) {
 		ExtentSparkReporter s=new ExtentSparkReporter(p);
 		s.config().setDocumentTitle(dt);
 		s.config().setReportName(rn);
@@ -18,6 +18,7 @@ public class ReportUtil {
 		report=new ExtentReports();
 		report.attachReporter(s);
 		report.setSystemInfo("os", System.getProperty("os.name"));
+		report.setSystemInfo("platformName", pn);
 	}
 	
 	public void createTest(String n) {

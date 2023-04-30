@@ -11,7 +11,7 @@ public class practice {
 	
 		Excel_utils excel = new Excel_utils("./src/test/resources/TestData/SriMandir.xlsx");
 		
-		System.out.println(excel.fetchTextView("textview"));
+		System.out.println(excel.rashifalElement("textview"));
 	}
 
 }

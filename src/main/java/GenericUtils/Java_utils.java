@@ -136,7 +136,7 @@ public class Java_utils {
 	
 	public String rashiDate()
 	{
-		String date=new SimpleDateFormat("dd MMMM,yyyy").format(new Date());
+		String date=new SimpleDateFormat("dd MMMM, yyyy").format(new Date());
 		return date+" Today's Rashifal";
 	}
 }

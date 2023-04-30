@@ -1,7 +1,10 @@
 package GenericUtils;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.mobile.NetworkConnection;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -25,10 +28,12 @@ public class BaseClass implements FrameworkConstans{
 	protected SoftAssert soft; 
 	protected Java_utils java;
 	protected Excel_utils excel;
+	protected ReportUtil report;
 
 	@BeforeClass
 	public void start() throws Exception{
 
+		report=Listener.srep;
 		prop=new PropertyUtils(PROPPATH);
 		excel=new Excel_utils(EXCELPATH);
 		soft=new SoftAssert();
@@ -44,7 +49,8 @@ public class BaseClass implements FrameworkConstans{
 		desireCapability.setCapability(MobileCapabilityType.UDID, prop.readData(Ennum_data.UDID));
 		desireCapability.setCapability(MobileCapabilityType.DEVICE_NAME, prop.readData(Ennum_data.DEVICENAME));
 		desireCapability.setCapability(MobileCapabilityType.AUTOMATION_NAME, prop.readData(Ennum_data.AUTOMATIONNAME));
-		desireCapability.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 10);
+		desireCapability.setCapability(MobileCapabilityType.NO_RESET, true);
+		desireCapability.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 600);
 
 		driver =new AndroidDriver(new URL("http://127.0.0.1:4723"),desireCapability);
 		driver.unlockDevice();
@@ -54,14 +60,14 @@ public class BaseClass implements FrameworkConstans{
 
 	protected Gestures gestures;
 	protected ExplorePage explore;
-	protected RashifalComponets rasiComponent;
+	protected RashifalComponets rashifalComponent;
+	
 	@BeforeMethod
 	public void object() {
-
 		explore=new ExplorePage(driver);
-		rasiComponent =new RashifalComponets(driver);
-
+		rashifalComponent =new RashifalComponets(driver);
 		gestures=new Gestures();
+		
 		Assert.assertTrue(explore.avatarTitle().isDisplayed(), "avatarTitle is not displayed");		
 		Assert.assertTrue(explore.navigationExplore().isDisplayed(), "navigationExplore is not displayed");
 		explore.navigationExplore().click();	

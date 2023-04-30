@@ -37,7 +37,7 @@ public class Excel_utils {
 			fis = new FileInputStream(fis_path);
 			open=WorkbookFactory.create(fis);
 		}
-		catch (IOException | EncryptedDocumentException e) {
+		catch (Exception e) {
 
 			e.printStackTrace();
 		} 
@@ -56,10 +56,19 @@ public class Excel_utils {
 	}
 	
 	public ArrayList<String> fetchTextView(String sheet) {
-		ArrayList<String> arlis=new ArrayList<>();
+		ArrayList<String> arlis=new ArrayList<String>();
 		Sheet sh = open.getSheet(sheet);
 		for(int i=0; i<sh.getLastRowNum(); i++) {
 			arlis.add(df.formatCellValue(sh.getRow(i).getCell(0)));
+		}
+		return arlis;
+	}
+	
+	public ArrayList<String> rashifalElement(String sheet) {
+		ArrayList<String> arlis=new ArrayList<String>();
+		Sheet sh = open.getSheet(sheet);
+		for(int i=0; i<sh.getLastRowNum(); i++) {
+			arlis.add(df.formatCellValue(sh.getRow(i).getCell(1)));
 		}
 		return arlis;
 	}

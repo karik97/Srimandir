@@ -1,14 +1,9 @@
 package Explore;
-
-import java.util.ArrayList;
-
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import GenericUtils.BaseClass;
 import GenericUtils.Ennum_data;
-import SriMandirPOM.RashifalComponets;
-import io.appium.java_client.android.connection.ConnectionState;
+import GenericUtils.UtilityTransfer;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 
@@ -66,8 +61,8 @@ public class ExploreTest extends BaseClass{
 	 */
 
 	@Test
-	public void SMPK_TC_3338() {
-		
+	public void SMPK_TC_3338() {		
+		report.info(UtilityTransfer.get() ,explore.widgetDateDay()+"--->"+java.rashiDate());
 		soft.assertTrue(explore.widgetDateDay().contains(java.rashiDate()));
 		soft.assertEquals(explore.exploreTitle(), "Explore");
 	}
@@ -95,39 +90,56 @@ public class ExploreTest extends BaseClass{
 		soft.assertTrue(explore.shareButton().isDisplayed());
 		soft.assertEquals(explore.exploreTitle(), "Explore");	    
 	}
+	
+	/**
+	 * Verify that user is getting rashifal bottomsheet when back to network state
+	 * 
+	 */
+	@Test
+	public void SMPK_TC_3374()  {
+		
+		gestures.thread(2000);
+		explore.rashi().click();
+		gestures.thread(2000);
+		gestures.DataOn(driver);
+		Assert.assertTrue(explore.bottomSheet().isDisplayed(),"bottomSheet is not displayed");		
+	}
+	
 
 	/**
 	 * Verify that bottomsheet is disappearing on selecting any Raashi
-	 * @throws InterruptedException 
 	 */
 
 	@Test
-	public void SMPK_TC_3375() throws InterruptedException {
+	public void SMPK_TC_3375(){
 
 		explore.widget().click();
 		explore.rashi().click();
-		Thread.sleep(5000);
+		gestures.thread(3000);
 		try {
 			soft.assertTrue(explore.bottomSheet().isDisplayed());
+			report.info(UtilityTransfer.get(), "bottomsheet is not dissappeared TC FAIL");
 		}
 		catch(Exception e) {
 			System.out.println("bottomsheet is dissappeared TC PASS");
+			report.info(UtilityTransfer.get(), "bottomsheet is dissappeared TC PASS");
 		}
 		soft.assertEquals(explore.exploreTitle(), "Explore");
 	}
 
 	/**
 	 * Verify that user is not getting multiple bottomsheet on clciking rashifal widget for multiple times after selecting a raashi	
-	 * @throws InterruptedException 
+	 *
 	 */
 
 	@Test
-	public void SMPK_TC_15220() throws InterruptedException {
+	public void SMPK_TC_15220() {
 		
 		for(int i=0; i<=3; i++) {
-			Thread.sleep(2000);
+			gestures.thread(3000);
 			explore.widget().click();
-			System.out.println(explore.bottomSheet().isDisplayed());			
+			System.out.println(explore.bottomSheet().isDisplayed());	
+			report.info(UtilityTransfer.get(), "bottomsheet is dissappeared");
 			explore.rashi().click();
 		}
 		soft.assertEquals(explore.exploreTitle(), "Explore");
@@ -140,8 +152,7 @@ public class ExploreTest extends BaseClass{
 	@Test
 	public void SMPK_TC_15221() {
 		
-		ConnectionState conn = driver.getConnection();
-	
+		gestures.thread(2000);
 	    explore.widget().click();
 	    explore.rashi().click();
 		soft.assertEquals(explore.sign(),"Gemini Sign");
@@ -162,7 +173,8 @@ public class ExploreTest extends BaseClass{
 	@Test
 	public void SMPK_TC_15223() {
 		explore.hamBurger().click();
-		
+		explore.expandedView();
+		soft.assertEquals(explore.exploreTitle(), "Explore");
 	}
 
 	/**
@@ -170,6 +182,8 @@ public class ExploreTest extends BaseClass{
 	 */
 	@Test
 	public void SMPK_TC_15224() {
+		gestures.DataOff(driver);
+		gestures.thread(2000);
 		soft.assertTrue(explore.defaultRashi().isDisplayed(),"defaultRashi is not displayed");
 		soft.assertEquals(explore.exploreTitle(), "Explore");
 	}
@@ -181,12 +195,14 @@ public class ExploreTest extends BaseClass{
 	@Test
 	public void SMPK_TC_15225() {
 		explore.widget().click();
-		gestures.clickByCooridnates(driver, 0,95,1080,2080);
+		gestures.click(500,500 ,driver);
 		try {
 			soft.assertTrue(explore.bottomSheet().isDisplayed());
+			report.info(UtilityTransfer.get(), "bottomsheet is not dissappeared TC FAIL");
 		}
 		catch(Exception e){
 			System.out.println("bottom sheet disappeared TC PASS");
+			report.info(UtilityTransfer.get(), "bottomsheet is dissappeared TC PASS");
 		}
 		soft.assertEquals(explore.exploreTitle(), "Explore");
 	}
@@ -200,9 +216,11 @@ public class ExploreTest extends BaseClass{
 		driver.pressKey(new KeyEvent(AndroidKey.BACK));
 		try {
 			soft.assertTrue(explore.bottomSheet().isDisplayed());
+			report.info(UtilityTransfer.get(), "bottomsheet is not dissappeared TC FAIL");
 		}
 		catch(Exception e) {
 			System.out.println("bottom sheet disappeared TC PASS");
+			report.info(UtilityTransfer.get(), "bottomsheet is dissappeared TC PASS");
 		}
 		soft.assertEquals(explore.exploreTitle(), "Explore");
 	}
@@ -223,21 +241,20 @@ public class ExploreTest extends BaseClass{
 	 */
 	@Test
 	public void SMPK_TC_15229() {
-		Assert.assertTrue(explore.hamBurger().isDisplayed(),"hamBurger is not displayed");
-		Assert.assertEquals(explore.exploreTitle(), "Explore");
-		rasiComponent.menuProfile();
-		
-		rasiComponent.tvTitle();
-		Assert.assertTrue(explore.defaultRashi().isDisplayed(),"defaultRashi is not displayed");
-		Assert.assertTrue(explore.widget().isDisplayed(),"widget is not displayed");
-		explore.rashi().click();
-		
-		Assert.assertTrue(explore.bottomSheet().isDisplayed(),"bottomSheet is not displayed");		
-		rasiComponent.textView(excel.fetchTextView(prop.readData(Ennum_data.TVSHEET)));
-		
-		//soft.assertTrue(explore.widgetDateDay().contains(java.rashiDate()));
-		//soft.assertTrue(explore.shareButton().isDisplayed(),"sharebutton is not displayed");
-	
 		
 	}
+	/**
+	 * Verify all the UI components of rashifal
+	 */
+	@Test
+	public void SMPK_TC_15230() {
+		
+		Assert.assertTrue(explore.widget().isDisplayed(), "widget is not displayed");
+		explore.widget().click();
+		rashifalComponent.bottomSHeetHeader();
+		rashifalComponent.textViewElement(excel.fetchTextView(prop.readData(Ennum_data.TVSHEET)));
+		rashifalComponent.containerElement(excel.rashifalElement(prop.readData(Ennum_data.TVSHEET)));
+		
+	}
+	
 }

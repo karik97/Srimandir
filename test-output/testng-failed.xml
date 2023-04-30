@@ -5,8 +5,8 @@
     <classes>
       <class name="Explore.ExploreTest">
         <methods>
-          <include name="SMPK_TC_15229"/>
           <include name="stop"/>
+          <include name="SMPK_TC_15230"/>
           <include name="start"/>
           <include name="object"/>
           <include name="closeApp"/>

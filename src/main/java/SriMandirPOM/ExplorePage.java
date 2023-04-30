@@ -1,6 +1,8 @@
 package SriMandirPOM;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -46,6 +48,9 @@ public class ExplorePage {
 	
 	@AndroidFindBy(id="com.mandir:id/hamburger_menu")
 	private WebElement hamBurger;
+	
+	@AndroidFindBy(id="com.mandir:id/parent_layout")
+    private WebElement expandedView;
 	
 	@AndroidFindBy(xpath = "//*[@text = 'WhatsApp']")
 	private WebElement whatsappShare;
@@ -120,6 +125,10 @@ public class ExplorePage {
 	
 	public WebElement hamBurger() {
 		return hamBurger;
+	}
+	
+	public void expandedView() {
+		Assert.assertTrue(expandedView.isDisplayed(), "expandedView is not displayed");
 	}
 
 	public WebElement shareUserB() {

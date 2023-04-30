@@ -15,7 +15,7 @@ public class Listener implements ITestListener,ISuiteListener,FrameworkConstans{
 	public void onStart(ISuite suite) {
 		System.out.println("onStart");
 		PropertyUtils p=new PropertyUtils(PROPPATH);
-		 rep = new ReportUtil("", p.readData(Ennum_data.DOCTITLE), p.readData(Ennum_data.REPORTNAME));
+		 rep = new ReportUtil(EXTENTPATH, p.readData(Ennum_data.DOCTITLE), p.readData(Ennum_data.REPORTNAME),p.readData(Ennum_data.DEVICEPLATFORM));
 		 srep=rep;
 	}
 	

@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface Annotation {
 
 	public String [] author() default "karti";
-	public String [] category()	default "sanity";
+	public String [] category() default "";
 }
