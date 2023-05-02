@@ -1,18 +1,23 @@
 package Explore;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import GenericUtils.Annotation;
 import GenericUtils.BaseClass;
 import GenericUtils.Ennum_data;
 import GenericUtils.UtilityTransfer;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 
+@Listeners(GenericUtils.Listener.class)
 public class ExploreTest extends BaseClass{
 
 	/**
 	 * Verify that user is getting Rashifal widget on navigating to homefeed
+	 * rashifal widget is not found in home page its defect according to the testcase
 	 */
 
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3329(){
 
@@ -23,7 +28,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user is getting rashifal bottomsheet on clicking the rashifal widget for the first time
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3331() {
 
@@ -34,7 +39,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user is able to select "Rashi" from the rashi bottomsheet
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3332() {
 
@@ -46,7 +51,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that the respective user selected raashi title is getting displayed
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3335() {
 
@@ -59,7 +64,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user is getting the respective date and day on the rashifal widget
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3338() {		
 		report.info(UtilityTransfer.get() ,explore.widgetDateDay()+"--->"+java.rashiDate());
@@ -70,7 +75,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user is getting the respective content displayed according to the selected rashifal
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3369() {
 
@@ -83,7 +88,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that the "Anya Rashifal dekhe" and share kare buttons are visible to the user
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3371() {
 
@@ -95,6 +100,7 @@ public class ExploreTest extends BaseClass{
 	 * Verify that user is getting rashifal bottomsheet when back to network state
 	 * 
 	 */
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3374()  {
 		
@@ -109,7 +115,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that bottomsheet is disappearing on selecting any Raashi
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_3375(){
 
@@ -131,7 +137,7 @@ public class ExploreTest extends BaseClass{
 	 * Verify that user is not getting multiple bottomsheet on clciking rashifal widget for multiple times after selecting a raashi	
 	 *
 	 */
-
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15220() {
 		
@@ -148,7 +154,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user is not getting empty Raashi name for the first time after selecting raashi in offline mode
 	 */
-	
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15221() {
 		
@@ -161,6 +167,7 @@ public class ExploreTest extends BaseClass{
 	
 	/**
 	 * Verify that user is getting "Anya rashifal" and share kare button on clicking Aur dekhe on the rashifal content
+	 * Anya rashifal did not found its a defect
 	 */
 	@Test
 	public void SMPK_TC_15222() {
@@ -170,6 +177,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user can use the default and expanded view of the rashifal content
 	 */
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15223() {
 		explore.hamBurger().click();
@@ -180,6 +188,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user is not getting empty Raashi name on selecting raashi for first time in offline mode
 	 */
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15224() {
 		gestures.DataOff(driver);
@@ -191,7 +200,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that bottomsheet disappears on clicking anywhere on the screen other than the bottomsheet area
 	 */
-	
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15225() {
 		explore.widget().click();
@@ -210,6 +219,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that bottom-sheet disappears on clicking device back
 	 */
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15226() {
 		explore.widget().click();
@@ -228,6 +238,7 @@ public class ExploreTest extends BaseClass{
 	/**
 	 * Verify that user is able to whatsapp share on clicking "Share kare"
 	 */
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15228() {
 		explore.shareButton().click();
@@ -238,6 +249,7 @@ public class ExploreTest extends BaseClass{
 	
 	/**
 	 * Verify that user is getting redirected to rashifal section on clicking the rashifal deeplink
+	 * did not found the deeplink
 	 */
 	@Test
 	public void SMPK_TC_15229() {
@@ -245,7 +257,9 @@ public class ExploreTest extends BaseClass{
 	}
 	/**
 	 * Verify all the UI components of rashifal
+	 * scroll action is not performing on the application 
 	 */
+	@Annotation(author = "kartik")
 	@Test
 	public void SMPK_TC_15230() {
 		
